@@ -1,6 +1,7 @@
 import 'package:KitchenKing/models/category.dart';
 import 'package:flutter/material.dart';
 import '../dummy_data.dart';
+import '../widgets/meal_items.dart';
 
 class CatMeals extends StatelessWidget {
   @override
@@ -18,7 +19,13 @@ class CatMeals extends StatelessWidget {
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return Text(categoryMeals[index].title);
+          return MealItem(
+            title: categoryMeals[index].title,
+            imageUrl: categoryMeals[index].imageUrl,
+            duration: categoryMeals[index].duration,
+            complexity: categoryMeals[index].complexity,
+            affordability: categoryMeals[index].affordability,
+          );
         },
         itemCount: categoryMeals.length,
       ),
