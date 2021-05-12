@@ -1,4 +1,3 @@
-import 'package:KitchenKing/models/category.dart';
 import 'package:flutter/material.dart';
 import '../dummy_data.dart';
 import '../widgets/meal_items.dart';
