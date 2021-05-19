@@ -39,10 +39,7 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           _buildList('Meals', Icons.restaurant, () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => TabsScreen()),
-            );
+            Navigator.of(context).pushReplacementNamed('/');
           }),
           _buildList('Filters', Icons.settings, () {
             Navigator.of(context).pushNamed('/filters');

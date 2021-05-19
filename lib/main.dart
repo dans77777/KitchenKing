@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
     'vegeterian': false
   };
   List<Meal> availableMeals = DUMMY_MEALS;
+  List<Meal> favorit = [];
 
   void _setFilters(Map<String, bool> _filterData) {
     setState(() {
@@ -44,6 +45,23 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void toggleMeal(String mealId) {
+    final existingIndex = favorit.indexWhere((meal) => meal.id == mealId);
+    if (existingIndex >= 0) {
+      setState(() {
+        favorit.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        favorit.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
+      });
+    }
+  }
+
+  bool _isMealfav(String mealId) {
+    return favorit.any((meal) => meal.id == mealId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -55,10 +73,11 @@ class _MyAppState extends State<MyApp> {
           textTheme: ThemeData.light()
               .textTheme
               .copyWith(title: TextStyle(fontSize: 20))),
-      home: TabsScreen(),
+      initialRoute: '/',
       routes: {
+        '/': (ctx) => TabsScreen(favorit),
         '/catMeals': (ctx) => CatMeals(availableMeals),
-        '/mealDetail': (ctx) => MealDetails(),
+        '/mealDetail': (ctx) => MealDetails(_isMealfav, toggleMeal),
         '/filters': (ctx) => FiltersScreen(_filters, _setFilters)
       },
     );

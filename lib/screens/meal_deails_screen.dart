@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import '../dummy_data.dart';
 
 class MealDetails extends StatelessWidget {
+  final Function toggleMeal;
+  final Function isFav;
+  MealDetails(this.isFav, this.toggleMeal);
   @override
   Widget build(BuildContext context) {
     String mealId = ModalRoute.of(context).settings.arguments as String;
@@ -72,8 +75,8 @@ class MealDetails extends StatelessWidget {
         ]),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () => Navigator.of(context).pop(),
+        child: Icon(isFav(mealId) ? Icons.star : Icons.star_border),
+        onPressed: () => toggleMeal(mealId),
       ),
     );
   }
