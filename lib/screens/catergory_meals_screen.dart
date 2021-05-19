@@ -1,15 +1,17 @@
+import 'package:KitchenKing/models/meals.dart';
 import 'package:flutter/material.dart';
-import '../dummy_data.dart';
 import '../widgets/meal_items.dart';
 
 class CatMeals extends StatelessWidget {
+  final List<Meal> availableMeals;
+  CatMeals(this.availableMeals);
   @override
   Widget build(BuildContext context) {
     final routesArg =
         ModalRoute.of(context).settings.arguments as Map<String, String>;
     final String title = routesArg['title'];
     final String id = routesArg['id'];
-    final categoryMeals = DUMMY_MEALS.where((meal) {
+    final categoryMeals = availableMeals.where((meal) {
       return meal.categories.contains(id);
     }).toList();
     return Scaffold(
